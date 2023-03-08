@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo</title>
+</head>
+<body>
+    <h1 id="title">Hello, DOM!</h1>
+    <ul>
+        <li>DOM Methods Examples</li>
+        <li>DOM Properties Examples</li>
+    </ul>
+    <button onclick="console.log('Code from event handler')">Click me</button>
+    <input id="username-input" name="username" type="text"/>
+    <button class="submit-btn">Submit Form</button>
+    <script>
+        function start() {
+            // const userNameInput = document.getElementById('username-input');
+            // const btn = document.getElementsByClassName('submit-btn');
+            const liElements = document.getElementsByTagName('li');
+
+            for (let el of liElements) {
+                console.log(el);
+            }
+        }
+    </script>
+</body>
+</html>
+
+<!-- function edit(ref, match, replacer) {
+    const matcher = new RegExp(match, 'g');
+    const result = ref.textContent.replace(matcher, replacer);
+    ref.textContent = result;
+} -->
