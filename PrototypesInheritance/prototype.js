@@ -26,9 +26,8 @@ function newOperator(constructor, ...params) {
     // const result = {};
     // Object.setPrototypeOf(result, Person.prototype);
     //or
-
     const result = Object.create(Person.prototype);
-
+    //----
     constructor.apply(result, params);
     return result;
 }
@@ -43,5 +42,4 @@ console.log(myPerson2, myPerson3)
 // console.log(myPerson);
 // console.log(myPerson.write);
 // console.log(myPerson.hasOwnProperty('write'));
-
 // myPerson.write('hello world!')
