@@ -9,7 +9,39 @@
 </head>
 
 <body>
+    <form method="post" action="http://localhost:3030/jsonstore/advanced/articles/details">
+        <input type="text" name="title">
+        <textarea name="content"></textarea>
+        <input type="submit" value="Publish Article">
+    </form>
+
     <script>
+        const form = document.getElementById('articleForm');
+        form.addEventListener('submit', event => {
+            event.preventDefault();
+            const formData = new FormData(form); // or event.target
+
+            const title = formData.get('title');
+            const content = formData.get('content');
+            //const title = form.querySelector('[name="title"]').value;
+            //const content = form.querySelector('[name="content"]').value;
+
+            // // console.log(title, content);
+
+            // const article = {title, content};
+            // postData(article);
+            postData({title, content});
+
+            new FormData(form);
+        })
+
+        // form.addEventListener('formdata', event => {
+        //     const title = event.formData.get('title');
+        //     const content = event.formData.get('content');
+
+        //     postData({title, content});
+        // })
+
         async function postData() {
             const data = {
                 title: 'First Post',
@@ -35,7 +67,20 @@
                     'Content-type': 'application/json'
                 },
                 body: JSON.stringify(data),
-            })
+            });
+
+            const result = await response.json();
+            console.log(result);
+        }
+
+        async function deleteData(id) {
+            const response = await fetch('http://localhost:3030/jsonstore/advanced/articles/details' + id, {
+                method: 'delete'
+            });
+
+            const result = await response.json();
+
+            console.log(result);
         }
     </script>
 </body>
