@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    
+</head>
+<body>
+    <form method="POST" action="/users/register">
+        <input type="text" name="email" />
+        <input type="password" name="password" />
+        <input type="submit" value="Register" />
+      </form>
+
+      <script>
+        async function register(email, password) {
+            const response = await fetch('http://localhost:3000/users/reguster', {
+                method: 'post',
+                headers: {'Content-type': 'application/json'},
+                body: JSON.stringify({email, password})
+            });
+
+            if(response.ok) {
+                const data = await response.json();
+                console.log(data)
+            } else {
+                alert(`Error: ${response.statusText}`);
+            }
+            
+
+        }
+      </script>
+      
+</body>
+</html>
