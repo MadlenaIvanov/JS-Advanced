@@ -1,0 +1,23 @@
+[
+    {
+        "title": "First Article",
+        "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam animi magni facilis, recusandae libero veniam",
+        "author": "Peter Person"
+    },    
+    {
+        "title": "Second Article",
+        "content": "Lorem",
+        "author": "Ivan Ivanov"
+    },    
+    {
+        "title": "Third Article",
+        "content": "Lorem ipsum dolor ",
+        "author": "Moon Merson"
+    },    
+    {
+        "title": "Forth Article",
+        "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+        "author": "Pesho Itan"
+    }
+
+]
