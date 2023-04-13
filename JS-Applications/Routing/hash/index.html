@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1> Welcome to Hash demo</h1>
+
+    <main>
+
+        <h2>Home page</h2>
+        <p>Home page content</p>
+    </main>
+
+    <script>
+        const pages = {
+            '#home': '<h2>Home page</h2><p>Home page content</p>',
+            '#catalog': '<h2>Catalog</h2><p>List of acticles</p>',
+            '#about': '<h2>About Us</h2><p>Contact information</p>'
+        }
+
+        const main = document.querySelector('main');
+        const currentHash = window.location.hash;
+        main.innerHTML = '<p>Heloow world</p>'
+
+    </script>
+    
+</body>
+</html>
