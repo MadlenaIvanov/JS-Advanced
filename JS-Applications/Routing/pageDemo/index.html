@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>History API Demo</title>
-    <script src="app.js"></script>
+    <script type="module" src="app.js"></script>
 </head>
 <body>
 
@@ -17,45 +17,8 @@
     </nav>
 
     <main>
+        <h2>App start page</h2>
 
-        <h2>Home page</h2>
-        <p>Home page content</p>
-    </main>
-
-    <script>
-       
-        const pages = {
-            '/home': '<h2>Home page</h2><p>Home page content</p>',
-            '/catalog': '<h2>Catalog</h2><p>List of acticles</p>',
-            '/about': '<h2>About Us</h2><p>Contact information</p>'
-        }
-        const defaultPage = '<h2>404</h2><p>Page Not Found</p>';
-
-        const main = document.querySelector('main');
-
-        window.addEventListener('popstate', updateContent);
-
-        document.querySelector('nav').addEventListener('click', ev => {
-            if(ev.target.tagName == 'A') {
-                ev.preventDefault();
-                history.pushState({name: 'Peter'}, '', ev.target.href);
-                // const url = new URL(ev.target.href);
-                // console.log(url.pathname);
-                updateContent();
-            }
-        })
-        updateContent();
-
-        function updateContent() {
-
-            //console.log(event);
-            //console.log(window.location.pathname);
-
-            const pathname = window.location.pathname;
-            main.innerHTML = pages[pathname] || defaultPage;
-        }
-        
-    </script>
-    
+    </main>    
 </body>
 </html>
