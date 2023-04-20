@@ -11,19 +11,13 @@ const defaultPage = '<h2>404</h2><p>Page Not Found</p>';
 
 const main = document.querySelector('main');
 
-page('/home', updateContent);
-page('/catalog', updateContent);
-page('/catalog/:id', itemDetails);
-page('/about', updateContent);
+page('/home', () => updateContent('/home'));
+page('/catalog', () => updateContent('/catalog'));
+page('/catalog/123', () => updateContent('/catalog/123'));
+page('/about', () => updateContent('/about'));
 page.start();
 
 
-function updateContent(context) {
-    main.innerHTML = pages[context.pathname] || defaultPage;
-}<
-
-function itemDetails(context) {
-    const id = context.params.id;
-    const html = `<h2>Item ${id}</h2><p>Details for item ${id}</p>`;
-    main.innerHTML = html;
+function updateContent(pathname) {
+    main.innerHTML = pages[pathname] || defaultPage;
 }
