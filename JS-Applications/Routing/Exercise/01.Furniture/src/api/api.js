@@ -6,17 +6,17 @@ async function request(url, options) {
     try {
         const response = await fetch(url, options);
 
-        if (response.ok == false) {
-            const error = await response.json();
-            throw new Error(error.message)
+        if (!response.ok) {
+            const err = await response.json();
+            throw new Error(err.message);
         }
-
         try {
             const data = await response.json();
             return data;
         } catch (err) {
             return response;
         }
+
     } catch (err) {
         alert(err.message);
         throw err;
@@ -33,7 +33,6 @@ function getOptions(method = 'get', body) {
     if (token != null) {
         options.headers['X-Authorization'] = token;
     }
-
     if (body) {
         options.headers['Content-Type'] = 'application/json';
         options.body = JSON.stringify(body);
@@ -44,7 +43,7 @@ function getOptions(method = 'get', body) {
 
 
 export async function get(url) {
-    return await request(url);
+    return await request(url, getOptions());
 }
 
 export async function post(url, data) {
@@ -86,11 +85,9 @@ export async function register(email, password) {
 }
 
 export async function logout() {
-    const result = await get(settings.host + '/users/logout');
-
+    const result =  await get(settings.host + '/users/logout');
     sessionStorage.removeItem('email');
     sessionStorage.removeItem('authToken');
     sessionStorage.removeItem('userId');
 
-    return result;
 }
