@@ -46,10 +46,13 @@ export async function registerPage(ctx) {
         }
     
         if(password != repass) {
+            ctx.render(registerTemplate(onSubmit, false, true, true))
             return alert('Passwords don\'t match');
         }
     
         await register(email, password);
+        ctx.setUserNav();
+
         ctx.page.redirect('/');
     }
 }
