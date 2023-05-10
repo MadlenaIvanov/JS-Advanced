@@ -64,20 +64,21 @@ export async function login(email, password) {
         password
     });
 
-    sessionStorage.setItem('email', result.email);
+    sessionStorage.setItem('username', result.username);
     sessionStorage.setItem('authToken', result.accessToken);
     sessionStorage.setItem('userId', result._id);
 
     return result;
 }
 
-export async function register(email, password) {
+export async function register(email, username, password) {
     const result = await post(settings.host + '/users/register', {
         email,
+        username,
         password
     });
 
-    sessionStorage.setItem('email', result.email);
+    sessionStorage.setItem('username', result.username);
     sessionStorage.setItem('authToken', result.accessToken);
     sessionStorage.setItem('userId', result._id);
 
@@ -86,8 +87,33 @@ export async function register(email, password) {
 
 export async function logout() {
     const result =  await get(settings.host + '/users/logout');
-    sessionStorage.removeItem('email');
+
+    sessionStorage.removeItem('username');
     sessionStorage.removeItem('authToken');
     sessionStorage.removeItem('userId');
 
+    return result;
+
 }
+
+export async function getTeams() {
+    return await api.get(host + '/data/teams');
+}
+
+export async function getTeamsById(id) {
+    return await api.get(host + '/data/teams/' + id);
+}
+
+export async function createTeam(team) {
+    return await api.post(host + '/data/teams');
+}
+
+
+export async function editTeam(id, team) {
+    return await api.put(host + '/data/teams/' + id, team);
+}
+
+export async function deleteTeam(id) {
+    return await api.del(host + '/data/teams/' + id);
+}
+
