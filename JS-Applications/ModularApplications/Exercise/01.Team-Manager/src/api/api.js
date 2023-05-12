@@ -18,7 +18,7 @@ async function request(url, options) {
         }
 
     } catch (err) {
-        alert(err.message);
+        //alert(err.message);
         throw err;
     }
 }
@@ -96,24 +96,4 @@ export async function logout() {
 
 }
 
-export async function getTeams() {
-    return await api.get(host + '/data/teams');
-}
-
-export async function getTeamsById(id) {
-    return await api.get(host + '/data/teams/' + id);
-}
-
-export async function createTeam(team) {
-    return await api.post(host + '/data/teams');
-}
-
-
-export async function editTeam(id, team) {
-    return await api.put(host + '/data/teams/' + id, team);
-}
-
-export async function deleteTeam(id) {
-    return await api.del(host + '/data/teams/' + id);
-}
 
