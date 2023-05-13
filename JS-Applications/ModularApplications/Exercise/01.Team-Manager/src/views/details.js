@@ -11,9 +11,9 @@ const detailsTemplate = (team) => html`
         <span class="details">? Members</span>
         <div>
             <a href=${`/edit/${team._id}`} class="action">Edit team</a>
-            <a href="#" class="action">Join team</a>
-            <a href="#" class="action invert">Leave team</a>
-            Membership pending. <a href="#">Cancel request</a>
+            <a href="javascript:void(0)" class="action">Join team</a>
+            <a href="javascript:void(0)" class="action invert">Leave team</a>
+            Membership pending. <a href="javascript:void(0)">Cancel request</a>
         </div>
     </div>
     <div class="pad-large">
