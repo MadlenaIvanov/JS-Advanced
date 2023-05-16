@@ -1,4 +1,5 @@
 import { html } from "../../node_modules/lit-html/lit-html.js";
+import { until } from "../../node_modules/lit-html/directives/until.js";
 import { getTeamsById } from '../api/data.js';
 
 const detailsTemplate = (team) => html`
@@ -35,3 +36,15 @@ const detailsTemplate = (team) => html`
     </div>
 </article>
 </section>`
+
+export async function detailsPage(ctx) {
+    const teamId = ctx.params.id;
+
+    ctx.render(until(populateTemplate(teamId), '<p>Loading</p>'));
+}
+
+async function populateTemplate(teamId) {
+    const team = await getTeamsById(teamId);
+    return detailsTemplate(team);
+
+}
