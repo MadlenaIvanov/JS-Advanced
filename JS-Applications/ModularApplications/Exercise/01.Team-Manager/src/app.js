@@ -9,6 +9,7 @@ import { registerPage } from './views/register.js';
 import { createPage } from './views/create.js';
 import { detailsPage } from './views/details.js';
 import { editPage } from './views/edit.js';
+import { myTeamsPage } from './views/myTeams.js';
 
 
 const main = document.querySelector('main');
@@ -22,6 +23,7 @@ page('/register', decorateContext, registerPage);
 page('/create', decorateContext, createPage);
 page('/details/:id', decorateContext, detailsPage);
 page('/edit/:id', decorateContext, editPage);
+page('/my-teams', decorateContext, myTeamsPage);
 
 setUserNav();
 page.start();

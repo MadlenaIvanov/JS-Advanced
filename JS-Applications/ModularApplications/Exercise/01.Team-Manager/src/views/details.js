@@ -2,7 +2,7 @@ import { html } from "../../node_modules/lit-html/lit-html.js";
 import { until } from "../../node_modules/lit-html/directives/until.js";
 import { getRequestsByTeamId, getTeamsById, requestToJoin, cancelMembership, approveMembership } from '../api/data.js';
 
-const detailsTemplate = (team, isOwner, createControls, pending) => html`
+const detailsTemplate = (team, isOwner, createControls, members,pending) => html`
 <section id="team-home">
 <article class="layout">
     <img src=${team.logoUrl} class="team-logo left-col">
@@ -18,9 +18,7 @@ const detailsTemplate = (team, isOwner, createControls, pending) => html`
     <div class="pad-large">
         <h3>Members</h3>
         <ul class="tm-members">
-            <li>My Username</li>
-            <li>James<a href="#" class="tm-control action">Remove from team</a></li>
-            <li>Meowth<a href="#" class="tm-control action">Remove from team</a></li>
+            ${members.map(m => memberTemplate(m, isOwner))}
         </ul>
     </div>
     ${isOwner ? html`<div class="pad-large">
@@ -32,6 +30,13 @@ const detailsTemplate = (team, isOwner, createControls, pending) => html`
 
 </article>
 </section>`;
+
+            
+const memberTemplate = (request, isOwner) => html`
+<li>
+    ${request.user.username} 
+    ${isOwner ? html`<a @click=${request.decline} href="javascript:void(0)" class="tm-control action">Remove from team</a>` : ''} 
+</li>`;
 
 const pendingMemberTemplate = (request) => html`
 <li>
@@ -52,18 +57,20 @@ export async function detailsPage(ctx) {
             getRequestsByTeamId(teamId),
         ]);
 
+        requests.forEach(r => {
+            r.approve = (e) => approve(e, r);
+            r.decline = (e) => leave(e, r._id);
+        });
+
         const isOwner = userId == team._ownerId;
-        team.memberCount = requests.filter(r => r.status == 'member').length;
 
-        const pending = requests
-            .filter(r => r.status == 'pending')
-            .map(r => {
-                r.approve = (e) => approve(e, r);
-                r.decline = (e) => leave(e, r._id);
-                return r;
-            })
+        const members = requests.filter(r => r.status == 'member');
 
-        return detailsTemplate(team, isOwner, createControls, pending);
+        const pending = requests.filter(r => r.status == 'pending');
+
+        team.memberCount = members.length;
+
+        return detailsTemplate(team, isOwner, createControls, members, pending);
 
         function createControls() {
             const request = requests.find(r => r._ownerId == userId);
